@@ -21,9 +21,6 @@ public class Solution {
             }
 
             while(left < right){
-                if(right - left <= result.length()){
-                    break;
-                }
                 if(s.charAt(left) != s.charAt(right - 1)){
                     right--;
                 }else{
@@ -36,6 +33,10 @@ public class Solution {
                         right--;
                     }
                 }
+
+                if(right - left <= result.length()){
+                    break;
+                }
             }
         }
 
@@ -43,7 +44,7 @@ public class Solution {
     }
 
     private boolean isPalindrome(String s, int left, int right){
-        if(left == right - 1){
+        if(right - left == 1){
             return true;
         }
 
@@ -55,6 +56,7 @@ public class Solution {
                 right--;
             }
         }
+
         return true;
     }
 }
