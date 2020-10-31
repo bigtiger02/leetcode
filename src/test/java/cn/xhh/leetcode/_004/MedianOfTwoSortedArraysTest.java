@@ -1,4 +1,4 @@
-package cn.xhh.leetcode._04;
+package cn.xhh.leetcode._004;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package cn.xhh.leetcode._04;
+package cn.xhh.leetcode._004;
 
 /**
  * Median of Two Sorted Arrays

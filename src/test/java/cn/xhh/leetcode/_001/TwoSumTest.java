@@ -1,8 +1,6 @@
-package cn.xhh.leetcode._01;
+package cn.xhh.leetcode._001;
 
 import org.junit.Test;
-
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 

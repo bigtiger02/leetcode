@@ -1,4 +1,4 @@
-package cn.xhh.leetcode._03;
+package cn.xhh.leetcode._003;
 
 import java.util.HashSet;
 import java.util.Set;

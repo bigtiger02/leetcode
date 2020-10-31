@@ -1,4 +1,4 @@
-package cn.xhh.leetcode._02;
+package cn.xhh.leetcode._002;
 
 /**
  * Add Two Numbers
