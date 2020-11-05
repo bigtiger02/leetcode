@@ -12,31 +12,29 @@ import java.util.*;
 public class Solution {
 
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        Stack<Integer> stack = new Stack<>();
+        int left = newInterval[0], right = newInterval[1];
+        boolean notUsedFlag = true;
         int[][] results = new int[intervals.length+1][2];
         int index = 0;
         for (int i = 0; i < intervals.length; i++) {
-            if(stack.isEmpty()){
-                if(intervals[i][1] < newInterval[0]){
-                    results[index++] = intervals[i];
-                } else if(intervals[i][0] <= newInterval[0]){
-                    stack.push(intervals[i][0]);
-                }else{
-                    if(newInterval[1] < intervals[i][0]){
-
-                    }
-                    stack.push(newInterval[0]);
+            if(intervals[i][0] > right){
+                if(notUsedFlag){
+                    results[index++] = new int[]{left, right};
+                    notUsedFlag = false;
                 }
-            }else {
-                if(intervals[i][0] > newInterval[1]){
-                    results[index++] = new int[]{stack.pop(), newInterval[1]};
-                    results[index++] = intervals[i];
-                }else{
-                    results[index++] = new int[]{stack.pop(), intervals[i][1]};
-                }
+                results[index++] = intervals[i];
+            }else if(intervals[i][1] < left){
+                results[index++] = intervals[i];
+            }else{
+                left = Math.min(left, intervals[i][0]);
+                right = Math.max(right, intervals[i][1]);
             }
         }
 
-        return Arrays.copyOfRange(results, 0 ,index);
+        if(notUsedFlag){
+            results[index++] = new int[]{left, right};
+        }
+        return Arrays.copyOfRange(results,0,index);
     }
+
 }
