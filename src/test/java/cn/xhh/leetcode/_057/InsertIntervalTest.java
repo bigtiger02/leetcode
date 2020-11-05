@@ -55,6 +55,12 @@ public class InsertIntervalTest {
         assertSuccess(new int[][]{{1,6},{7,9}},results);
     }
 
+    @Test
+    public void case8(){
+        int[][] results = solution.insert(new int[][]{},new int[]{2,4});
+        assertSuccess(new int[][]{{2,4}},results);
+    }
+
     private void assertSuccess(int[][] expects, int[][] results){
         boolean flag = true;
         for (int i = 0; i < expects.length; i++) {

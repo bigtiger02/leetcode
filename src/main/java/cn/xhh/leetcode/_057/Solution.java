@@ -12,29 +12,50 @@ import java.util.*;
 public class Solution {
 
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        int left = newInterval[0], right = newInterval[1];
-        boolean notUsedFlag = true;
-        int[][] results = new int[intervals.length+1][2];
-        int index = 0;
-        for (int i = 0; i < intervals.length; i++) {
-            if(intervals[i][0] > right){
-                if(notUsedFlag){
-                    results[index++] = new int[]{left, right};
-                    notUsedFlag = false;
-                }
-                results[index++] = intervals[i];
-            }else if(intervals[i][1] < left){
-                results[index++] = intervals[i];
+        int left = 0, right = intervals.length - 1;
+
+        while(left <= right){
+            if(intervals[left][1] < newInterval[0]){
+                left++;
+            }else if(intervals[right][0] > newInterval[1]){
+                right--;
             }else{
-                left = Math.min(left, intervals[i][0]);
-                right = Math.max(right, intervals[i][1]);
+                break;
             }
         }
 
-        if(notUsedFlag){
-            results[index++] = new int[]{left, right};
+        //完全在左边
+        int[][] results = new int[intervals.length - right + left][2];
+        int index = 0;
+        if(-1 == right){
+            results[index++] = newInterval;
+            for (int i = 0; i < intervals.length; i++) {
+                results[index++] = intervals[i];
+            }
+            return results;
         }
-        return Arrays.copyOfRange(results,0,index);
+
+        //完全在最右边
+        if(intervals.length == left){
+            for (int i = 0; i < intervals.length; i++) {
+                results[index++] = intervals[i];
+            }
+            results[index++] = newInterval;
+            return results;
+        }
+
+        //合并数组,左右指针距离即为减少的数组长度
+        for (int i = 0; i < left; i++) {
+            results[index++] = intervals[i];
+        }
+        int leftValue = Math.min(intervals[left][0], newInterval[0]);
+        int rightValue = Math.max(intervals[right][1], newInterval[1]);
+        results[index++] = new int[]{leftValue, rightValue};
+        for (int i = right+1; i < intervals.length; i++) {
+            results[index++] = intervals[i];
+        }
+
+        return results;
     }
 
 }
