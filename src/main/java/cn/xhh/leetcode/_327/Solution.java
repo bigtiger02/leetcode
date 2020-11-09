@@ -1,7 +1,5 @@
 package cn.xhh.leetcode._327;
 
-import java.util.*;
-
 /**
  * Count of range sum
  * <a href="https://leetcode-cn.com/problems/count-of-range-sum/">Count of range sum</a>
