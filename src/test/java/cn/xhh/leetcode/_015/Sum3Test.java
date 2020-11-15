@@ -126,4 +126,34 @@ public class Sum3Test {
         };
         assertEquals(expects, result);
     }
+
+    @Test
+    public void case10(){
+        int[] nums = {-1,0,1,2,-1,-4,-2,-3,3,0,4};
+        List<List<Integer>> result = solution.threeSum(nums);
+
+        int[][] expects = {
+                {-4,0,4},
+                {-4,1,3},
+                {-3,-1,4},
+                {-3,0,3},
+                {-3,1,2},
+                {-2,-1,3},
+                {-2,0,2},
+                {-1,-1,2},
+                {-1,0,1}
+        };
+        assertEquals(expects, result);
+    }
+
+    @Test
+    public void case11(){
+        int[] nums = {-2,-3,0,0,2};
+        List<List<Integer>> result = solution.threeSum(nums);
+
+        int[][] expects = {
+                {-2,0,2}
+        };
+        assertEquals(expects, result);
+    }
 }
