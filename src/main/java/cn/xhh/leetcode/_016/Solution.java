@@ -11,12 +11,12 @@ import java.util.Arrays;
  */
 public class Solution {
     public int threeSumClosest(int[] nums, int target) {
+        int result = nums[0] + nums[1] + nums[2];
         if(nums.length == 3){
-            return nums[0] + nums[1] + nums[2];
+            return result;
         }
 
         Arrays.sort(nums);
-        int result = nums[0] + nums[1] + nums[2];
         for (int i = 0; i < nums.length; i++) {
             if(i > 0 && nums[i-1] == nums[i]){
                 continue;
@@ -24,13 +24,13 @@ public class Solution {
 
             int l = i + 1, r = nums.length-1;
             while(l < r){
-                int tmp = nums[i] + nums[l] + nums[r];
-                if(tmp == target){
+                int sum = nums[i] + nums[l] + nums[r];
+                if(sum == target){
                     return target;
                 }
 
-                if(Math.abs(target - tmp) < Math.abs(target - result)){
-                    result = tmp;
+                if(Math.abs(target - sum) < Math.abs(target - result)){
+                    result = sum;
 
                     while(l < r && l+1 < nums.length && nums[l+1] == nums[l]){
                         l++;
@@ -41,7 +41,7 @@ public class Solution {
                     }
                 }
 
-                if(tmp <= target){
+                if(sum <= target){
                     l++;
                 }else{
                     r--;
