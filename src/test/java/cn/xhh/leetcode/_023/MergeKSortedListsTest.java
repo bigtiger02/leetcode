@@ -69,4 +69,14 @@ public class MergeKSortedListsTest {
         Solution.ListNode result = solution.mergeKLists(nodes);
         assertTrue(new Integer[]{2,6}, result);
     }
+
+    @Test
+    public void case4(){
+        Solution.ListNode[] nodes = new Solution.ListNode[]{
+                createNode(new int[]{-2,-1,-1,-1}),
+                createNode(new int[]{})
+        };
+        Solution.ListNode result = solution.mergeKLists(nodes);
+        assertTrue(new Integer[]{-2,-1,-1,-1}, result);
+    }
 }
