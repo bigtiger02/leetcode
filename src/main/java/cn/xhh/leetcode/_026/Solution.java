@@ -16,40 +16,14 @@ public class Solution {
             return nums.length;
         }
 
-        int len = 0;
-        for (int i = 0; i < nums.length-1; i++) {
-            if(nums[i] != nums[i+1]){
-                len++;
-                continue;
+        int i =0, j = 1;
+        while(j < nums.length){
+            if(nums[j] != nums[i]){
+                nums[i++] = nums[j];
             }
-
-            int j = i+1;
-            while(j < nums.length && nums[j] == nums[j+1]){
-                j++;
-            }
-
-
-        }
-        int l = 0, r = nums.length - 1;
-        int tmp;
-        while(l < r){
-            if(nums[l] == nums[l+1]){
-                tmp = nums[l+1];
-                nums[l+1] = nums[r];
-                nums[r] = tmp;
-                r--;
-            }else if(nums[l] > nums[l+1]){
-                tmp = nums[l+1];
-                nums[l+1] = nums[l];
-                nums[l] = tmp;
-                if(l>= 1 && nums[l] == nums[l-1]){
-                    l--;
-                }
-            }else{
-                l++;
-            }
+            j++;
         }
 
-        return r+1;
+        return i+1;
     }
 }
