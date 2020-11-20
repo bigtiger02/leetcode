@@ -6,19 +6,20 @@ package cn.xhh.leetcode._070;
  * @author <a href="mailto:bigtiger02@gmail.com">xhh</a>
  * @date 2020/11/20
  */
-public class Solution {
+public class Solution1 {
     public int climbStairs(int n) {
-        if(n < 3){
-            return n;
+        return tryClimb(n-1) + tryClimb(n-2);
+    }
+
+    private int tryClimb(int n){
+        if(n == 0){
+            return 1;
         }
 
-        int a = 1, b = 2, result = 0;
-        for (int i = 3; i <= n; i++) {
-            result = a + b;
-            a = b;
-            b = result;
+        if(n < 0){
+            return 0;
         }
 
-        return result;
+        return tryClimb(n-1) + tryClimb(n-2);
     }
 }
