@@ -16,6 +16,10 @@ public class Solution {
     }
 
     public ListNode rotateRight(ListNode head, int k) {
+        if(null == head || head.next == null){
+            return head;
+        }
+
         ListNode pHead = head;
         int len = 0;
         while(pHead != null){
@@ -23,16 +27,12 @@ public class Solution {
             pHead = pHead.next;
         }
 
-        if(0 == len){
-            return head;
-        }
-
         int step = k % len;
         if(0 == step){
             return head;
         }
 
-        ListNode tHead = head, p = tHead, q = p;
+        ListNode tHead = head, p = head, q = p;
         int tStep = 0;
         while(q != null){
             if(tStep < step){
@@ -46,12 +46,12 @@ public class Solution {
                 q = q.next;
             }else{
                 q.next = tHead;
+                tHead = p.next;
+                p.next = null;
                 break;
             }
         }
 
-        tHead = p.next;
-        p.next = null;
         return tHead;
     }
 }
