@@ -8,23 +8,22 @@ package cn.xhh.leetcode._062;
  */
 public class Solution {
     public int uniquePaths(int m, int n) {
-        if(n == 0 || (m == 1 && n == 1)){
-            return n;
+        if(n == 0 || n == 1 || m == 1){
+            return n  == 0 ? 0 : 1;
         }
 
-        return uniquePath(2,1, m, n) + uniquePath(1,2, m, n);
-    }
-
-    private int uniquePath(int m, int n, int tm, int tn){
-        if(m == tm || n == tn){
-            return 1;
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if(i == 0 || j == 0){
+                    dp[i][j] = 1;
+                }else{
+                    dp[i][j] = dp[i][j-1] + dp[i-1][j];
+                }
+            }
         }
 
-        if(m < tm && n < tn){
-            return uniquePath(m+1,n, tm, tn) + uniquePath(m,n+1, tm, tn);
-        }
-
-        return 0;
+        return dp[m-1][n-1];
     }
 
 }
