@@ -1,8 +1,5 @@
 package cn.xhh.leetcode._141;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Linked list cycle
  * <a href="https://leetcode-cn.com/problems/linked-list-cycle/">Linked list cycle</a>
