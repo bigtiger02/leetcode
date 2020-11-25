@@ -25,7 +25,26 @@ public class Solution {
             this.right = right;
         }
     }
+
+    private int maxSum = 0;
     public int maxPathSum(TreeNode root) {
-        return 0;
+        if(null == root){
+            return 0;
+        }
+        maxSum = Integer.MIN_VALUE;
+        dfs(root);
+        return maxSum;
+    }
+
+    private int dfs(TreeNode node) {
+        if(null == node){
+            return 0;
+        }
+
+        int left = Math.max(dfs(node.left),0);
+        int right = Math.max(dfs(node.right),0);
+        maxSum = Math.max(maxSum, left + right + node.val);
+        int tMaxSum = node.val + Math.max(left, right);
+        return tMaxSum < 0 ? 0 : tMaxSum;
     }
 }
