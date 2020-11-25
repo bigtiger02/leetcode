@@ -23,10 +23,18 @@ public class BinaryTreeMaximumPathSumTest {
 
     @Test
     public void case2(){
-        Solution.TreeNode root = new Solution.TreeNode(10,
+        Solution.TreeNode root = new Solution.TreeNode(-10,
                 new Solution.TreeNode(9),new Solution.TreeNode(20,
                 new Solution.TreeNode(15), new Solution.TreeNode(7)));
         int result = solution.maxPathSum(root);
         Assert.assertEquals(42, result);
+    }
+
+    @Test
+    public void case3(){
+        Solution.TreeNode root = new Solution.TreeNode(1,
+                new Solution.TreeNode(-2),new Solution.TreeNode(3));
+        int result = solution.maxPathSum(root);
+        Assert.assertEquals(4, result);
     }
 }

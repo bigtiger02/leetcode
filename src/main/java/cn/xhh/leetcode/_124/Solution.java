@@ -31,7 +31,7 @@ public class Solution {
         if(null == root){
             return 0;
         }
-        maxSum = Integer.MIN_VALUE;
+        maxSum = root.val;
         dfs(root);
         return maxSum;
     }
@@ -40,11 +40,13 @@ public class Solution {
         if(null == node){
             return 0;
         }
+        int left = dfs(node.left);
+        int right = dfs(node.right);
+        // 更新答案
+        maxSum = Math.max(maxSum, node.val + left + right);
 
-        int left = Math.max(dfs(node.left),0);
-        int right = Math.max(dfs(node.right),0);
-        maxSum = Math.max(maxSum, left + right + node.val);
-        int tMaxSum = node.val + Math.max(left, right);
-        return tMaxSum < 0 ? 0 : tMaxSum;
+        // 返回节点的最大贡献值
+        int tMax = node.val + Math.max(left, right);
+        return Math.max(tMax,0);
     }
 }
