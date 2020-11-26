@@ -18,7 +18,7 @@ public class SortListTest {
     private Solution.ListNode createListNode(int[] arr){
         Solution.ListNode head = new Solution.ListNode(arr[0]);
         Solution.ListNode pNode = head;
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             pNode.next = new Solution.ListNode(arr[i]);
             pNode = pNode.next;
         }
