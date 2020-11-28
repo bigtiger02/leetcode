@@ -23,4 +23,10 @@ public class MajorityElementTest {
         int result = solution.majorityElement(new int[]{2,2,1,1,1,2,2});
         Assert.assertEquals(2,result);
     }
+
+    @Test
+    public void case3(){
+        int result = solution.majorityElement(new int[]{3,3,4});
+        Assert.assertEquals(3,result);
+    }
 }
