@@ -28,38 +28,54 @@ public class Solution {
         }
     }
 
-    private Map<Integer, TreeNode> parentMap = new HashMap<>();
-    private Set<Integer> visited = new HashSet<>();
+    private boolean flag;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(null == root){
             return null;
         }
 
-        dfs(root);
+        List<TreeNode> path1 = new ArrayList<>();
+        this.flag = false;
+        dfs(root, p, path1);
 
-        while(p != null){
-            visited.add(p.val);
-            p = parentMap.get(p.val);
-        }
+        List<TreeNode> path2 = new ArrayList<>();
+        this.flag = false;
+        dfs(root, q, path2);
 
-        while(q != null){
-            if(visited.contains(q.val)){
-                return q;
+        int len = Math.min(path1.size(), path2.size());
+        TreeNode result = null;
+        for (int i = 0; i < len; i++) {
+            if(path1.get(i).val == path2.get(i).val){
+                result = path1.get(i);
+            }else{
+                break;
             }
-            q = parentMap.get(q.val);
         }
-        return null;
+
+        return result;
     }
 
-    private void dfs(TreeNode root) {
-        if(root.left != null){
-            parentMap.put(root.left.val, root);
-            dfs(root.left);
+    private void dfs(TreeNode root, TreeNode p, List<TreeNode> path) {
+        if(null == root){
+            return;
         }
 
-        if(root.right != null){
-            parentMap.put(root.right.val, root);
-            dfs(root.right);
+        path.add(root);
+        if(root.val == p.val){
+            this.flag = true;
+            return;
+        }
+
+        if(!flag){
+            dfs(root.left, p, path);
+        }
+
+        if(!flag){
+            dfs(root.right, p, path);
+        }
+
+        if(!flag){
+            path.remove(root);
         }
     }
 }

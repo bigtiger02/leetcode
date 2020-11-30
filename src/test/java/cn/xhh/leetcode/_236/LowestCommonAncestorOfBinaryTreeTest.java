@@ -28,4 +28,21 @@ public class LowestCommonAncestorOfBinaryTreeTest {
                 new Solution.TreeNode(4));
         Assert.assertEquals(2, result.val);
     }
+
+    @Test
+    public void case2(){
+        Solution.TreeNode root = new Solution.TreeNode(3,
+                new Solution.TreeNode(5,
+                        new Solution.TreeNode(6),
+                        new Solution.TreeNode(2,
+                                new Solution.TreeNode(7),
+                                new Solution.TreeNode(4))),
+                new Solution.TreeNode(1,
+                        new Solution.TreeNode(0),
+                        new Solution.TreeNode(8)));
+        Solution.TreeNode result = solution.lowestCommonAncestor(root,
+                new Solution.TreeNode(5),
+                new Solution.TreeNode(1));
+        Assert.assertEquals(3, result.val);
+    }
 }
