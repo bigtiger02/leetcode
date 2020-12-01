@@ -46,7 +46,7 @@ public class Solution {
                     char lpc = p.charAt(j-2);
                     if(dp[i][j-2]) {//为空场景
                         dp[i][j] = true;
-                    }else if(lpc == sc || lpc == '.'){//上一个字符匹配
+                    }else if(lpc == sc || lpc == '.'){//前者需要匹配
                         dp[i][j] = dp[i-1][j];
                     }
                 }
