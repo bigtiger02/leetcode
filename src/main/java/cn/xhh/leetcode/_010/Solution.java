@@ -1,5 +1,7 @@
 package cn.xhh.leetcode._010;
 
+import java.util.Arrays;
+
 /**
  * Regular expression matching
  * <a href="https://leetcode-cn.com/problems/regular-expression-matching/">Regular expression matching</a>
@@ -8,49 +10,50 @@ package cn.xhh.leetcode._010;
  */
 public class Solution {
     public boolean isMatch(String s, String p) {
-        if(null == s || null == p){
+        //都为空返回 true
+        if("".equals(s) && "".equals(p)){
+            return true;
+        }
+
+        if("".equals(p)){
             return false;
         }
 
-        int slen = s.length();
-        int plen = p.length();
-
-        if(slen == 0 || plen == 0 || '*' == p.charAt(0)){
+        //* 开头不合法通配符
+        if('*' == p.charAt(0)){
             return false;
         }
 
-        int i = slen-1, j = plen-1;
-        String lastPattern = "";
-        while(i >= 0 && j >= 0){
-            char c = s.charAt(i);
-            char pc = p.charAt(j);
-            if(c == pc || '.' == pc){
-                lastPattern = s.substring(i,i+1);
-                i--;
-                j--;
-            }else if('*' == pc && j-1 >= 0){
-                int end = i+1;
-                char pp = p.charAt(j-1);
-                while(i >= 0 && (pp == s.charAt(i) || pp == '.')){
-                    i--;
+        int sLength = s.length(), pLength = p.length();
+        //初始化dp
+        boolean[][] dp = new boolean[sLength+1][pLength+1];
+        dp[0][0] = true;
+        dp[0][1] = false;
+        //谨防 s="" p="a*" 场景
+        for (int i = 1; i < pLength; i++) {
+            char pc = p.charAt(i);
+            dp[0][i + 1] = pc == '*' && dp[0][i-1];
+        }
+
+        //填表
+        for (int i = 1; i <= sLength; i++) {
+            for (int j = 1; j <= pLength; j++) {
+                char sc = s.charAt(i-1);
+                char pc = p.charAt(j-1);
+                if(pc == '.' || sc == pc){//不为*场景
+                    dp[i][j] = dp[i-1][j-1];
+                }else if(pc == '*' && j >= 2){//为*场景
+                    char lpc = p.charAt(j-2);
+                    if(dp[i][j-2]) {//为空场景
+                        dp[i][j] = true;
+                    }else if(lpc == sc || lpc == '.'){//上一个字符匹配
+                        dp[i][j] = dp[i-1][j];
+                    }
                 }
-                int start = i < 0 ? 0 : i;
-                lastPattern = s.substring(start,end);
-                j -= 2;
-            }else{
-                return false;
             }
         }
 
-        //可能为空去掉重复部分
-        while(j>=0 && p.charAt(j) == '*'){
-            j-=2;
-        }
-        //表明中间一部分被其他模式吃掉，需要判断剩余模式是否和最后一种模式匹配
-        if(j >= 0 && lastPattern != null && lastPattern.length() > 0){
-            return isMatch(lastPattern, p.substring(0,j+1));
-        }
-
-        return i < 0 && j < 0;
+        return dp[sLength][pLength];
     }
 }
+
