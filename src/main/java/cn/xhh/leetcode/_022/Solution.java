@@ -1,8 +1,6 @@
 package cn.xhh.leetcode._022;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Generate parentheses
@@ -16,29 +14,31 @@ public class Solution {
         if(n == 0){
             return results;
         }
-
-        dfs('(',n-1, n, 0, new char[2*n],results);
+        dfs(n, n, new StringBuilder(), results);
         return  results;
     }
 
-    private void dfs(char c, int left,int right, int index, char[] chars, List<String> results) {
+    private void dfs(int left, int right,
+                     StringBuilder sb, List<String> results) {
         if(left > right){
             return;
         }
-        chars[index] = c;
 
-        if(index == chars.length-1){
-            results.add(new String(chars));
+        if(left == 0 && right == 0){
+            results.add(sb.toString());
             return;
         }
-        if(left > 0){
-            char[] tmp = Arrays.copyOf(chars,chars.length);
-            dfs('(',left-1,right,index+1,tmp,results);
+
+        if(left != 0){
+            StringBuilder tmp = new StringBuilder(sb);
+            tmp.append('(');
+            dfs(left-1, right, tmp,results);
         }
 
-        if(right > 0){
-            char[] tmp1 = Arrays.copyOf(chars,chars.length);
-            dfs(')',left,right-1,index+1,tmp1,results);
+        if(right != 0){
+            StringBuilder tmp = new StringBuilder(sb);
+            tmp.append(')');
+            dfs(left, right-1, tmp,results);
         }
     }
 }
