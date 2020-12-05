@@ -17,10 +17,6 @@ public class Solution {
             return new int[]{-1,-1};
         }
 
-        if(nums[0] == target && nums[len-1] == target){
-            return new int[]{0,len-1};
-        }
-
         int firstIndex = -1;
         int left = 0, right = nums.length-1;
         while(left < right){
