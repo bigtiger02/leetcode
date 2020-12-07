@@ -1,0 +1,36 @@
+package cn.xhh.leetcode._1143;
+
+/**
+ * Solution
+ *
+ * @author <a href="mailto:bigtiger02@gmail.com">xhh</a>
+ * @date 2020/12/8
+ */
+public class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        if(null == text1 || text1.length() == 0){
+            return 0;
+        }
+
+        if(null == text2 || text2.length() == 0){
+            return 0;
+        }
+
+        int m = text1.length(), n = text2.length();
+        int[][] dp = new int[m+1][n+1];
+        dp[0][0] = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                char c1 = text1.charAt(i);
+                char c2 = text2.charAt(j);
+                if(c1 == c2){
+                    dp[i+1][j+1] = dp[i][j] + 1;
+                }else{
+                    dp[i+1][j+1] = Math.max(dp[i+1][j],dp[i][j+1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+}
