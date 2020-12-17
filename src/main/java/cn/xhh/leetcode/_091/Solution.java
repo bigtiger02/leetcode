@@ -8,6 +8,16 @@ package cn.xhh.leetcode._091;
  */
 public class Solution {
     public int numDecodings(String s) {
+        if(null == s || s.length() == 0){
+            return 0;
+        }
 
+        if("0".equals(s)){
+            return 0;
+        }
+
+        int[] dp = new int[s.length()+1];
+        for (int i = 0; i < s.length(); i++) {
+        }
     }
 }
