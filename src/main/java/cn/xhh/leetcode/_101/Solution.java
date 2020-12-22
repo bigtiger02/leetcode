@@ -1,9 +1,6 @@
 package cn.xhh.leetcode._101;
 
-import java.util.Deque;
 import java.util.LinkedList;
-import java.util.concurrent.DelayQueue;
-
 /**
  * symmetric tree
  * <a href="https://leetcode-cn.com/problems/symmetric-tree/">symmetric tree</a>
