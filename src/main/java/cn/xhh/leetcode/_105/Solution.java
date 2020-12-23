@@ -1,6 +1,5 @@
 package cn.xhh.leetcode._105;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,45 +30,25 @@ public class Solution {
     private Map<Integer,Integer> inOrderIndexMap = new HashMap<>();
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if(null == preorder || preorder.length == 0
-                || null == inorder || inorder.length == 0){
-            return null;
-        }
-
         for (int i = 0; i < inorder.length; i++) {
             inOrderIndexMap.put(inorder[i],i);
         }
-
-
-        return buildTree(preorder,inorder,
-                0,preorder.length-1,
-                0, inorder.length-1);
+        return build(preorder,0, preorder.length-1,
+                0, inorder.length - 1);
     }
 
-    private TreeNode buildTree(int[] preorder, int[] inorder,
-                               int preOrderStart, int preOrderEnd,
-                               int inOrderStart, int inOrderEnd){
-        if(preOrderStart >= preOrderEnd){
+    private TreeNode build(int[] preorder,
+                           int preLeft, int preRight,
+                           int inLeft, int inRight) {
+        if(preLeft > preRight || inLeft > inRight){
             return null;
         }
 
-        if(inOrderStart >= inOrderEnd){
-            return null;
-        }
-
-        TreeNode root = new TreeNode(preorder[preOrderStart]);
-        int index = inOrderIndexMap.get(preorder[preOrderStart]);
-        preOrderStart = preOrderStart+1;
-        preOrderEnd = Math.max(preOrderStart+1+index, preorder.length);
-        root.left = buildTree(preorder, inorder,
-                preOrderStart+1, preOrderEnd,
-                0, inOrderStart);
-
-        inOrderStart = inOrderStart;
-        inOrderEnd = inOrderStart;
-        root.right = buildTree(preorder, inorder,
-                preOrderStart+1, preOrderStart+1+index,
-                index, inorder.length);
+        TreeNode root = new TreeNode(preorder[preLeft]);
+        int rootIndex = inOrderIndexMap.get(preorder[preLeft]);
+        int len = rootIndex - inLeft;
+        root.left = build(preorder, preLeft+1, preLeft+len, inLeft, rootIndex-1);
+        root.right = build(preorder, preLeft+len+1,preRight,rootIndex+1,inRight);
         return root;
     }
 }
