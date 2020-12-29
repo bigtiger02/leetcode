@@ -2,7 +2,6 @@ package cn.xhh.leetcode._128;
 
 import java.util.HashMap;
 import java.util.Map;
-
 /**
  * longest-consecutive-sequence
  * <a href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">longest-consecutive-sequence</a>

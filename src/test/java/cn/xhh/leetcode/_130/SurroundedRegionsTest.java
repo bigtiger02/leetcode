@@ -13,6 +13,13 @@ public class SurroundedRegionsTest {
 
     @Test
     public void case1() {
-
+        char[][] board = new char[][]{
+                {'X','X','X','X'},
+                {'X','O','O','X'},
+                {'X','X','O','X'},
+                {'X','O','X','X'}
+        };
+        solution.solve(board);
+        System.out.println(board);
     }
 }
